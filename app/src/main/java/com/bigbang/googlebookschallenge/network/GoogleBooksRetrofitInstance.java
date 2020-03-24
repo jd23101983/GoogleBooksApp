@@ -1,5 +1,6 @@
 package com.bigbang.googlebookschallenge.network;
 
+import com.bigbang.googlebookschallenge.model.BookResultSet;
 import com.bigbang.googlebookschallenge.model.Item;
 import com.bigbang.googlebookschallenge.util.Constants;
 
@@ -41,8 +42,7 @@ public class GoogleBooksRetrofitInstance {
         return retrofitInstance.create(GoogleBooksService.class);
     }
 
-    public Observable<List<Item>> getGoogleBooksRx(String search_terms, String api_key) {
+    public Observable<BookResultSet> getGoogleBooksRx(String search_terms, String api_key) {
         return googleBooksService.getGoogleBooksRx(search_terms, api_key);
     }
-
 }

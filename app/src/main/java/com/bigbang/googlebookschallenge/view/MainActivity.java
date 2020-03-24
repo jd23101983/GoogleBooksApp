@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        RxJava--------------------------------------------------------------------------->
         compositeDisposable.add(googleBooksViewModel.getGoogleBooksRx("James Bond", Constants.API_KEY).subscribe(googleBookResults -> {
-            displayInformationRx(googleBookResults);
+            displayInformationRx(googleBookResults.getItems());
         }, throwable -> {
             DebugLogger.logError(throwable);
 

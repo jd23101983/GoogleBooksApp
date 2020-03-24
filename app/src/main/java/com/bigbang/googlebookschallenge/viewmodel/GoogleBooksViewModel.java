@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
+import com.bigbang.googlebookschallenge.model.BookResultSet;
 import com.bigbang.googlebookschallenge.model.Item;
 import com.bigbang.googlebookschallenge.network.GoogleBooksRetrofitInstance;
 
@@ -24,7 +25,7 @@ public class GoogleBooksViewModel extends AndroidViewModel {
         googleBooksRetrofitInstance = new GoogleBooksRetrofitInstance();
     }
 
-    public Observable<List<Item>> getGoogleBooksRx(String search_terms, String api_key) {
+    public Observable<BookResultSet> getGoogleBooksRx(String search_terms, String api_key) {
         return  googleBooksRetrofitInstance
                 .getGoogleBooksRx(search_terms, api_key)
                 .observeOn(AndroidSchedulers.mainThread())

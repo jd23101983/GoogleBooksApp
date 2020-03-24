@@ -1,5 +1,6 @@
 package com.bigbang.googlebookschallenge.network;
 
+import com.bigbang.googlebookschallenge.model.BookResultSet;
 import com.bigbang.googlebookschallenge.model.Item;
 
 import java.util.List;
@@ -26,5 +27,5 @@ public interface GoogleBooksService {
 */
 
     @GET(URL_POSTFIX)
-    Observable<List<Item>> getGoogleBooksRx(@Query("q") String search_terms, @Query("key") String api_key);
+    Observable<BookResultSet> getGoogleBooksRx(@Query("q") String search_terms, @Query("key") String api_key);
 }
