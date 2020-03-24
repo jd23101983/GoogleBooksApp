@@ -8,7 +8,7 @@ public class Constants {
     public static final String RESULTS_NULL = "Results were null";
 
     //Retrofit call
-    public static final String GET_URL_POSTFIX = "/users/{user_name}/repos";
-    public static final String USER_NAME = "user_name";
-    public static final String BASE_URL = "https://api.github.com/";
+    public static final String BASE_URL = "https://www.googleapis.com";
+    public static final String URL_POSTFIX = "/books/v1/volumes?";
+    public static final String API_KEY = "AIzaSyCWyYjgsjKkto58Jf-oUpd6lE9RvlV1q1Q";
 }
