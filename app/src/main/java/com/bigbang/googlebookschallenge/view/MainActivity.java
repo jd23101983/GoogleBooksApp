@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     //    RxJava
     private void displayInformationRx(List<Item> googleBookResults) {
         for (int i = 0; i < googleBookResults.size(); i++) {
-            DebugLogger.logDebug("RxJava : " + googleBookResults.get(i).getSearchInfo());
+            DebugLogger.logDebug("RxJava : " + googleBookResults.get(i).getVolumeInfo().getDescription());
         }
     }
 
