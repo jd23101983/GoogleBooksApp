@@ -3,6 +3,7 @@ package com.bigbang.googlebookschallenge.view;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.bigbang.googlebookschallenge.R;
+import com.bigbang.googlebookschallenge.adapter.GoogleBooksAdapter;
 import com.bigbang.googlebookschallenge.model.Item;
 import com.bigbang.googlebookschallenge.util.Constants;
 import com.bigbang.googlebookschallenge.util.DebugLogger;
@@ -65,9 +67,21 @@ public class MainActivity extends AppCompatActivity {
 
     // RxJava
     private void displayInformationRx(List<Item> googleBookResults) {
+
+        updateRecyclerView(googleBookResults);
+
         for (int i = 0; i < googleBookResults.size(); i++) {
+            DebugLogger.logDebug("RxJava : " + googleBookResults.get(i).getVolumeInfo().getImageLinks().getThumbnail());
+            DebugLogger.logDebug("RxJava : " + googleBookResults.get(i).getVolumeInfo().getTitle());
+            DebugLogger.logDebug("RxJava : " + googleBookResults.get(i).getVolumeInfo().getAuthors());
             DebugLogger.logDebug("RxJava : " + googleBookResults.get(i).getVolumeInfo().getDescription());
         }
+    }
+
+    private void updateRecyclerView(List<Item> googleBookResults) {
+        GoogleBooksAdapter adapter = new GoogleBooksAdapter(googleBookResults);
+        bookResultsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        bookResultsRecyclerView.setAdapter(adapter);
     }
 
 }

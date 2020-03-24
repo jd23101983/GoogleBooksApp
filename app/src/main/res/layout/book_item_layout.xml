@@ -35,7 +35,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/room_cost_textview"
+            android:id="@+id/book_authors_textview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_12sp"
