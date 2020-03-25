@@ -6,8 +6,11 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.bigbang.googlebookschallenge.R;
@@ -33,8 +36,6 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView bookResultsRecyclerView;
 
     private GoogleBooksViewModel googleBooksViewModel;
-
-    // RxJava
     private CompositeDisposable compositeDisposable = new CompositeDisposable(); // RxJava
 
     @Override
@@ -44,19 +45,21 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         googleBooksViewModel = ViewModelProviders.of(this).get(GoogleBooksViewModel.class);
-
-        // RxJava
-        compositeDisposable.add(googleBooksViewModel.getGoogleBooksRx("James Bond", Constants.API_KEY).subscribe(googleBookResults -> {
-            displayInformationRx(googleBookResults.getItems());
-        }, throwable -> {
-            DebugLogger.logError(throwable);
-        }));
-
     }
 
     @OnClick(R.id.search_button)
     public void performSearch(View view) {
 
+        String search_terms = searchEditText.getText().toString().trim();
+        searchEditText.setText("");
+        searchEditText.clearFocus();
+
+        // RxJava
+        compositeDisposable.add(googleBooksViewModel.getGoogleBooksRx(search_terms, Constants.API_KEY).subscribe(googleBookResults -> {
+            displayInformationRx(googleBookResults.getItems());
+        }, throwable -> {
+            DebugLogger.logError(throwable);
+        }));
     }
 
     @Override
@@ -71,10 +74,12 @@ public class MainActivity extends AppCompatActivity {
         updateRecyclerView(googleBookResults);
 
         for (int i = 0; i < googleBookResults.size(); i++) {
-            DebugLogger.logDebug("RxJava : " + googleBookResults.get(i).getVolumeInfo().getImageLinks().getThumbnail());
-            DebugLogger.logDebug("RxJava : " + googleBookResults.get(i).getVolumeInfo().getTitle());
-            DebugLogger.logDebug("RxJava : " + googleBookResults.get(i).getVolumeInfo().getAuthors());
-            DebugLogger.logDebug("RxJava : " + googleBookResults.get(i).getVolumeInfo().getDescription());
+            //DebugLogger.logDebug("RxJava : " + googleBookResults.get(i).getVolumeInfo().getImageLinks().getThumbnail());
+            if (googleBookResults.get(i) != null) {
+                DebugLogger.logDebug("RxJava : " + googleBookResults.get(i).getVolumeInfo().getTitle());
+                DebugLogger.logDebug("RxJava : " + googleBookResults.get(i).getVolumeInfo().getAuthors());
+                DebugLogger.logDebug("RxJava : " + googleBookResults.get(i).getVolumeInfo().getDescription());
+            }
         }
     }
 

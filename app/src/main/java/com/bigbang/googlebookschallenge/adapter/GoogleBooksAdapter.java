@@ -43,12 +43,20 @@ public class GoogleBooksAdapter extends RecyclerView.Adapter<GoogleBooksAdapter.
     @Override
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
 
-        Glide.with(theParent.getContext())
-                .load(bookResults.get(position).getVolumeInfo().getImageLinks().getThumbnail())
-                .into(holder.bookImage);
+        //if (bookResults.get(position) != null) {
+        try {
+            //if (!bookResults.get(position).getVolumeInfo().getImageLinks().getThumbnail().equals(null)) {
+            if (bookResults.get(position) != null) {
+                Glide.with(theParent.getContext())
+                        .load(bookResults.get(position).getVolumeInfo().getImageLinks().getThumbnail())
+                        .placeholder(R.drawable.button_background)
+                        .into(holder.bookImage);
+                holder.bookTitle.setText(bookResults.get(position).getVolumeInfo().getTitle());
+                holder.bookAuthors.setText(bookResults.get(position).getVolumeInfo().getAuthors().toString());
+            }
+        }
+        catch (Exception e) {e.printStackTrace(); }
 
-        holder.bookTitle.setText(bookResults.get(position).getVolumeInfo().getTitle());
-        holder.bookAuthors.setText(bookResults.get(position).getVolumeInfo().getAuthors().toString());
     }
 
     @Override
