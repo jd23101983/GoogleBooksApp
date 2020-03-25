@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.EditText;
 
 import com.bigbang.googlebookschallenge.R;
 import com.bigbang.googlebookschallenge.adapter.GoogleBooksAdapter;
+import com.bigbang.googlebookschallenge.database.BooksDB;
 import com.bigbang.googlebookschallenge.model.Item;
 import com.bigbang.googlebookschallenge.util.Constants;
 import com.bigbang.googlebookschallenge.util.DebugLogger;
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     private GoogleBooksViewModel googleBooksViewModel;
     private CompositeDisposable compositeDisposable = new CompositeDisposable(); // RxJava
+    private BooksDB booksDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,13 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         googleBooksViewModel = ViewModelProviders.of(this).get(GoogleBooksViewModel.class);
+
+        booksDB = Room.databaseBuilder(
+                this,
+                BooksDB.class,
+                "books.db")
+                .allowMainThreadQueries()
+                .build();
     }
 
     @OnClick(R.id.search_button)
