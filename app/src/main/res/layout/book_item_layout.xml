@@ -26,10 +26,10 @@
             android:id="@+id/book_title_textview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_18sp"
+            android:textSize="@dimen/text_24sp"
             android:textStyle="bold"
-            android:padding="@dimen/dimen_8dp"
-            tools:text="Room Number"
+            android:layout_margin="@dimen/dimen_8dp"
+            tools:text="Book Title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/book_image"
             app:layout_constraintTop_toTopOf="parent" />
@@ -40,11 +40,33 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_12sp"
             android:textStyle="bold"
-            android:padding="@dimen/dimen_8dp"
-            tools:text="Room Cost"
+            android:layout_margin="@dimen/dimen_8dp"
+            tools:text="Book Authors"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/book_image"
             app:layout_constraintTop_toBottomOf="@id/book_title_textview" />
+
+        <TextView
+            android:id="@+id/book_favorite_textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_18sp"
+            android:textStyle="bold"
+            android:layout_margin="@dimen/dimen_8dp"
+            tools:text="Favorite: "
+            app:layout_constraintEnd_toStartOf="@id/book_favorite_togglebutton"
+            app:layout_constraintStart_toEndOf="@id/book_image"
+            app:layout_constraintTop_toBottomOf="@id/book_authors_textview" />
+
+        <ToggleButton
+            android:id="@+id/book_favorite_togglebutton"
+            android:layout_width="@dimen/dimen_80dp"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_margin="@dimen/dimen_8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/book_favorite_textview"
+            app:layout_constraintTop_toBottomOf="@id/book_authors_textview" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
